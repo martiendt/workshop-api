@@ -26,7 +26,7 @@ export class UserEntity {
   }
 
   public async generateRandomUsername() {
-    this.user.username = "";
+    this.user.username = "username-" + Math.random() * 1000;
   }
 
   public async generateRandomPassword() {
