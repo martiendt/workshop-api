@@ -1,5 +1,5 @@
 import { UserRepository } from "../repositories/user.repository.js";
-import DatabaseConnection from "@src/database/connection.js";
+import DatabaseConnection, { QueryInterface } from "@src/database/connection.js";
 
 export class ReadUserService {
   private db: DatabaseConnection;
@@ -16,5 +16,21 @@ export class ReadUserService {
       username: user.username,
       role: user.role,
     };
+  }
+  public async duplicate(name: string) {
+    const iQuery: QueryInterface = {
+      fields: "",
+      filter: { name: name },
+      page: 1,
+      pageSize: 1,
+      sort: "",
+    };
+    const userRepository = new UserRepository(this.db);
+    const user = await userRepository.readMany(iQuery);
+    if (user.data[0]) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
