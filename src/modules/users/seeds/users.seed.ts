@@ -8,5 +8,6 @@ export const usersSeed = [
     email: "admin@example.com",
     password: password,
     name: "Admin",
+    role: "admin operations",
   },
 ];
