@@ -19,17 +19,14 @@ export const invite = async (req: Request, res: Response, next: NextFunction) =>
     } else {
       validate(req.body);
 
-      // const inviteUserService = new InviteUserService(db);
-      // const result = await inviteUserService.handle(req.body, { session });
-
-      const result = {
-        _id: "...",
-      };
+      const inviteUserService = new InviteUserService(db);
+      const result = await inviteUserService.handle(req.body, { session });
 
       await db.commitTransaction();
 
       res.status(201).json({
-        _id: result._id,
+        code: 201,
+        message: "success invite user",
       });
     }
   } catch (error) {

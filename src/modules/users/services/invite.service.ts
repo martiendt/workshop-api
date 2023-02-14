@@ -1,3 +1,4 @@
+import { UserRepository } from "../repositories/user.repository.js";
 import DatabaseConnection from "@src/database/connection.js";
 
 export class InviteUserService {
@@ -5,7 +6,11 @@ export class InviteUserService {
   constructor(db: DatabaseConnection) {
     this.db = db;
   }
-  public async handle() {
-    return {};
+  public async handle(doc: any, session: any) {
+    const userRepository = new UserRepository(this.db);
+    const user = await userRepository.create(doc, session);
+    return {
+      _id: user._id,
+    };
   }
 }
