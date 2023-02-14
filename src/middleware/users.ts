@@ -11,7 +11,7 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
     const verifyTokenUserService = new VerifyTokenUserService(db);
     const result = await verifyTokenUserService.handle(authorizationHeader);
 
-    if (result._id) {
+    if (result.role === "admin invite user") {
       next();
     } else {
       res.status(401).json({ code: 401, message: "Unauthorize" });
