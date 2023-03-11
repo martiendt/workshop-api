@@ -7,7 +7,7 @@ export interface UserInterface {
   email?: string;
   password?: string;
   name?: string;
-  role?: string;
+  role?: string[];
   emailValidationCode?: string;
   status?: "registered" | "activated" | "suspended";
 }

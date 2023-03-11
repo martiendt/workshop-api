@@ -8,7 +8,7 @@ export class ReadUserService {
   }
   public async handle(id: string, options: any) {
     const userRepository = new UserRepository(this.db);
-    const user = await userRepository.read(id);
+    const user = await userRepository.read(id, options);
     return {
       _id: user._id,
       name: user.name,
