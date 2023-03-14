@@ -1,9 +1,24 @@
 import { NextFunction, Request, Response } from "express";
+import { DestroyUserService } from "../services/destroy.service.js";
+import { db } from "@src/database/database.js";
 
 export const destroy = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.status(204).json({});
+    const session = db.startSession();
+
+    db.startTransaction();
+
+    // 1.2 delete/cancel invitation
+    const destroyUserService = new DestroyUserService(db);
+    await destroyUserService.handle(req.params.id, { session });
+
+    await db.commitTransaction();
+
+    res.status(204);
   } catch (error) {
+    await db.abortTransaction();
     next(error);
+  } finally {
+    await db.endSession();
   }
 };

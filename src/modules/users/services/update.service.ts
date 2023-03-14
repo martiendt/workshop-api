@@ -8,9 +8,7 @@ export class UpdateUserService {
   }
   public async handle(id: any, doc: any, session: any) {
     const userRepository = new UserRepository(this.db);
-    const user = await userRepository.update(id, doc, session);
-    return {
-      _id: user.upsertedId,
-    };
+    await userRepository.update(id, doc, session);
+    return;
   }
 }

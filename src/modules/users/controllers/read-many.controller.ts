@@ -24,22 +24,12 @@ export const readMany = async (req: Request, res: Response, next: NextFunction) 
     }
 
     // read data user
-    let search;
-    search = { $regex: req.query.search, $options: "i" };
-    if (!req.query.search) search = null;
-
-    const filter = {
-      status: req.query.status || { $exists: true },
-      name: req.query.name || search || { $exists: true },
-    };
-    const page = req.query.page;
-    const pageSize = req.query.pageSize;
     const readManyUserService = new ReadManyUserService(db);
-    const result = await readManyUserService.handle(filter, page, pageSize);
+    const result = await readManyUserService.handle(req.query, { session });
 
     // if no data found
     if (!result.user.data[0]) {
-      return res.status(204).json({ code: 204, status: "No Content", message: "data not found" });
+      throw new ApiError(404);
     }
 
     await db.commitTransaction();
