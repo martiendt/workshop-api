@@ -25,17 +25,26 @@ export const readMany = async (req: Request, res: Response, next: NextFunction) 
 
     // read data user
     const readManyUserService = new ReadManyUserService(db);
-    const result = await readManyUserService.handle(req.query, { session });
+    const { user } = await readManyUserService.handle(req.query, { session });
 
     // if no data found
-    if (!result.user.data[0]) {
+    if (!user.data[0]) {
       throw new ApiError(404);
     }
 
     await db.commitTransaction();
 
     // if there is data
-    res.status(200).json(result);
+    console.log(user);
+    res.status(200).json({
+      data: user.data,
+      pagination: {
+        page: user.pagination.page,
+        pageCount: user.pagination.pageCount,
+        pageSize: user.pagination.pageSize,
+        totalDocument: user.pagination.totalDocument,
+      },
+    });
   } catch (error) {
     await db.abortTransaction();
     next(error);
