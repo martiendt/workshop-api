@@ -27,7 +27,7 @@ export const update = async (req: Request, res: Response, next: NextFunction) =>
 
     // edit invitation user 1.3 check duplicate name
     const updateValidationUserService = new UpdateValidationUserService(db);
-    const duplicate = await updateValidationUserService.handle(req.body.id, req.body.name);
+    const duplicate = await updateValidationUserService.handle(req.params.id, req.body.name, { session });
 
     if (duplicate) {
       throw new ApiError(422, { name: ["name must be unique"] });
@@ -42,7 +42,7 @@ export const update = async (req: Request, res: Response, next: NextFunction) =>
 
     await db.commitTransaction();
 
-    res.status(204);
+    res.status(204).json({});
   } catch (error) {
     await db.abortTransaction();
     next(error);

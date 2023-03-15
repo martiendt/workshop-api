@@ -25,7 +25,7 @@ export const read = async (req: Request, res: Response, next: NextFunction) => {
 
     // read data user by id
     const readUserService = new ReadUserService(db);
-    const result = await readUserService.handle(req.params.id, session);
+    const result = await readUserService.handle(req.params.id, { session });
 
     await db.commitTransaction();
 
