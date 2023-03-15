@@ -11,12 +11,8 @@ export const invite = async (req: Request, res: Response, next: NextFunction) =>
 
     validate(req.body);
 
-    // const inviteUserService = new InviteUserService(db);
-    // const result = await inviteUserService.handle(req.body, { session });
-
-    const result = {
-      _id: "...",
-    };
+    const inviteUserService = new InviteUserService(db);
+    const result = await inviteUserService.handle(req.body, { session });
 
     await db.commitTransaction();
 
@@ -28,5 +24,6 @@ export const invite = async (req: Request, res: Response, next: NextFunction) =>
     next(error);
   } finally {
     await db.endSession();
+    await db.close();
   }
 };

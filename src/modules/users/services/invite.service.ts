@@ -5,7 +5,9 @@ export class InviteUserService {
   constructor(db: DatabaseConnection) {
     this.db = db;
   }
-  public async handle() {
-    return {};
+  public async handle(data: any, session: any) {
+    return {
+      _id: "12345",
+    };
   }
 }

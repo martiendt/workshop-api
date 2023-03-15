@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "redocly.openapi-vs-code"
+    "dbaeumer.vscode-eslint"
   ]
 }

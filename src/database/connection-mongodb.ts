@@ -167,7 +167,7 @@ export default class MongoDbConnection implements IDatabaseAdapter {
     }
   }
 
-  public async createMany(docs: DocumentInterface[], options?: CreateOptionsInterface): Promise<CreateResultInterface> {
+  public async createMany(docs: DocumentInterface[], options?: CreateOptionsInterface): Promise<any> {
     if (!this._collection) {
       throw new Error("Collection not found");
     }
@@ -179,7 +179,8 @@ export default class MongoDbConnection implements IDatabaseAdapter {
 
       return {
         acknowledged: response.acknowledged,
-        _id: "response.insertedId.toString()",
+        insertedCount: response.insertedCount,
+        insertedIds: response.insertedIds,
       };
     } catch (error) {
       if (error instanceof MongoServerError) {
