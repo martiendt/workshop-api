@@ -196,8 +196,8 @@ export default class DatabaseConnection {
     return await this.adapter.deleteAll(options);
   }
 
-  public async aggregate(pipeline: any, query?: any): Promise<unknown> {
-    return await this.adapter.aggregate(pipeline, query);
+  public async aggregate(pipeline: any, query?: any, options?: AggregrateOptionsInterface): Promise<any> {
+    return await this.adapter.aggregate(pipeline, query, options);
   }
 
   public createIndex(name: string, spec: unknown, options?: unknown) {

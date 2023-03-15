@@ -12,6 +12,7 @@ import DatabaseConnection, {
   ReadManyResultInterface,
   UpdateResultInterface,
   DeleteResultInterface,
+  AggregrateOptionsInterface,
 } from "@src/database/connection.js";
 
 export class UserRepository extends BaseRepository {
@@ -43,7 +44,7 @@ export class UserRepository extends BaseRepository {
     return await this.collection().delete(id, options);
   }
 
-  public async aggregate(pipeline: any, query: any) {
-    return await this.collection().aggregate(pipeline, query);
+  public async aggregate(pipeline: any, query: any, options?: AggregrateOptionsInterface) {
+    return await this.collection().aggregate(pipeline, query, options);
   }
 }
