@@ -21,7 +21,15 @@ export async function createCollection(db: IDatabaseAdapter) {
       bsonType: "object",
       required: ["email"],
       properties: {
-        name: {
+        username: {
+          bsonType: "string",
+          description: "must be a string",
+        },
+        email: {
+          bsonType: "string",
+          description: "must be a string",
+        },
+        password: {
           bsonType: "string",
           description: "must be a string",
         },

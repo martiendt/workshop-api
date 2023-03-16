@@ -1,15 +1,13 @@
 import { ObjectId } from "mongodb";
-import { hash } from "@src/utils/hash.js";
 
 export interface UserInterface {
   _id?: string | ObjectId;
   username?: string;
   email?: string;
   password?: string;
-  name?: string;
-  role?: string;
-  emailValidationCode?: string;
-  status?: "registered" | "activated" | "suspended";
+  role_id?: string | ObjectId;
+  emailVerificationCode?: string;
+  isEmailVerified?: boolean;
 }
 
 export const restricted = ["password"];
@@ -21,15 +19,7 @@ export class UserEntity {
     this.user = user;
   }
 
-  public generateEmailValidationCode() {
-    this.user.emailValidationCode = "";
-  }
-
-  public async generateRandomUsername() {
-    this.user.username = "username-" + Math.random() * 1000;
-  }
-
-  public async generateRandomPassword() {
-    this.user.password = "";
+  public generateEmailVerificationCode() {
+    this.user.emailVerificationCode = "";
   }
 }
