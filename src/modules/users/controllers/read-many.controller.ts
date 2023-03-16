@@ -35,7 +35,6 @@ export const readMany = async (req: Request, res: Response, next: NextFunction) 
     await db.commitTransaction();
 
     // if there is data
-    console.log(user);
     res.status(200).json({
       data: user.data,
       pagination: {

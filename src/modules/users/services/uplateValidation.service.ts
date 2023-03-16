@@ -16,7 +16,6 @@ export class UpdateValidationUserService {
     ];
     const userRepository = new UserRepository(this.db);
     const result = await userRepository.aggregate(pipeline, query, options);
-    console.log(result.data.length);
     if (result.data.length > 0) {
       return true;
     }
