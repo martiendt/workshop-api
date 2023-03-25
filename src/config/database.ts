@@ -24,10 +24,14 @@ export const connection: IDatabaseConfig = {
   mongodb: {
     driver: "mongodb",
     protocol: "mongodb",
-    url: process.env.DATABASE_URL as string,
+    url:
+      process.env.NODE_ENV == "test" ? (process.env.TEST_DATABASE_URL as string) : (process.env.DATABASE_URL as string),
     host: "localhost",
     port: 27017,
-    name: process.env.DATABASE_NAME as string,
+    name:
+      process.env.NODE_ENV == "test"
+        ? (process.env.TEST_DATABASE_NAME as string)
+        : (process.env.DATABASE_NAME as string),
     username: "",
     password: "",
   },

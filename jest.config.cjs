@@ -8,4 +8,6 @@ module.exports = {
     "^@src/(.*)\\.js$": "<rootDir>/src/$1",
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
+  preset: "@shelf/jest-mongodb",
+  setupFilesAfterEnv: ["./test/e2e/setup.ts"],
 };

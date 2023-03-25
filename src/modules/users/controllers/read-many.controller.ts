@@ -27,11 +27,6 @@ export const readMany = async (req: Request, res: Response, next: NextFunction) 
     const readManyUserService = new ReadManyUserService(db);
     const { user } = await readManyUserService.handle(req.query, { session });
 
-    // if no data found
-    if (!user.data[0]) {
-      throw new ApiError(404);
-    }
-
     await db.commitTransaction();
 
     // if there is data
